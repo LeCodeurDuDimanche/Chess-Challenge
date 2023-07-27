@@ -10,4 +10,9 @@ public class ProxyBot<BotClass> : IChessBot where BotClass: IChessBot
     {
         return proxyBot.Think(board, timer);
     }
+
+    public override string ToString()
+    {
+        return this.GetType().BaseType.GenericTypeArguments[0].Name;
+    }
 }

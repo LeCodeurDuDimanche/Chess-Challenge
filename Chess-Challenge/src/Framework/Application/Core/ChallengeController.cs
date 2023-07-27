@@ -102,6 +102,9 @@ namespace ChessChallenge.Application
             PlayerWhite.SubscribeToMoveChosenEventIfHuman(OnMoveChosen);
             PlayerBlack.SubscribeToMoveChosenEventIfHuman(OnMoveChosen);
 
+            BotStatsA.BotName = "" + PlayerWhite;
+            BotStatsB.BotName = "" + PlayerBlack;
+
             // UI Setup
             boardUI.UpdatePosition(board);
             boardUI.ResetSquareColours();
@@ -392,7 +395,7 @@ namespace ChessChallenge.Application
             MatchStatsUI.DrawMatchStats(this);
         }
 
-        static string GetPlayerName(ChessPlayer player) => GetPlayerName(player.PlayerType);
+        static string GetPlayerName(ChessPlayer player) => "" + player;
         static string GetPlayerName(PlayerType type) => type.ToString();
 
         public void StartNewBotMatch(PlayerType botTypeA, PlayerType botTypeB)

@@ -59,6 +59,11 @@ namespace ChessChallenge.Application
             }
         }
 
+        public override string ToString()
+        {
+            return Bot is not null ? "" + Bot : "Human";
+        }
+
 
     }
 }
