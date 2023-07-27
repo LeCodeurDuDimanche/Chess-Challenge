@@ -3,5 +3,5 @@ using System;
 
 namespace ChessChallenge.Example
 {
-    public class EvilBot : ProxyBot<DefaultEvilBot>{}
+    public class EvilBot : ProxyBot<BotAdrien>{}
 }
