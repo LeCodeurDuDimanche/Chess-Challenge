@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
+
+// Current problems / improvements to be made : 
+// - AI values too much forward pawns and do not want to drop them to defend pieces
+//      - This conflicts with protection projection score that take into account that we will defend our pieces
+//      - In this case, take into account the higher value of pawns in exchanges (take care to match weights)
+// - AI does not keep the king protected
+//      - We need a king safety score, especially when a lot of material is in to play
+// - AI mass up pieces to get protection score, rather than trying to trap other pieces.
+//      - Maybe add points to pinned pieces, try to get our pieces focusing the enmey king
+// - AI is prone to draw by repetition in case of local maximums
+// - AI is buggy when playing black (leaves piece hanging in one)
+// - Although overall play seems more solid, due to the blunders done by the AI and its incapability to make a plan late game, with loose to AI2
+
+// Remarks:
+// - AI does not value specially ennemy advanced pawns
 namespace BotAdrien3WithProtectors{
     public struct MoveAndScore {
         public Move move;
@@ -196,7 +211,7 @@ namespace BotAdrien3WithProtectors{
                 }
                 if ((bestLocalMove.score > bestMove.score && ourTurn) || (bestLocalMove.score < bestMove.score && !ourTurn))
                 {
-                    Console.WriteLine(spaces + "Move " + move.move + " is better than " + bestMove.move + " for " + (ourTurn  ? "us": "them") + " at depth " + maxDepth + " with score " + bestLocalMove.score);
+                   // Console.WriteLine(spaces + "Move " + move.move + " is better than " + bestMove.move + " for " + (ourTurn  ? "us": "them") + " at depth " + maxDepth + " with score " + bestLocalMove.score);
                     bestMove.score = bestLocalMove.score;
                     bestMove.move = move.move;
                 }
@@ -211,7 +226,7 @@ namespace BotAdrien3WithProtectors{
         {
             weAreWhite = board.IsWhiteToMove;
             MoveAndScore bestMove = Search(board, timer.MillisecondsRemaining > 30000 ? 2 : timer.MillisecondsRemaining / 10000);
-            Console.WriteLine("Got move " + bestMove.move + " with score " + bestMove.score + "\n\n\n           ============");
+            //Console.WriteLine("Got move " + bestMove.move + " with score " + bestMove.score /*+ "\n\n\n           ============"*/);
 
             return bestMove.move;
         }

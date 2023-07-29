@@ -102,9 +102,6 @@ namespace ChessChallenge.Application
             PlayerWhite.SubscribeToMoveChosenEventIfHuman(OnMoveChosen);
             PlayerBlack.SubscribeToMoveChosenEventIfHuman(OnMoveChosen);
 
-            BotStatsA.BotName = "" + PlayerWhite;
-            BotStatsB.BotName = "" + PlayerBlack;
-
             // UI Setup
             boardUI.UpdatePosition(board);
             boardUI.ResetSquareColours();
@@ -284,6 +281,7 @@ namespace ChessChallenge.Application
                 if (log)
                 {
                     Log("Game Over: " + result, false, ConsoleColor.Blue);
+                    Log("Remaining clock time: " +GetPlayerName(PlayerWhite)+ " " + PlayerWhite.TimeRemainingMs + " ms / " +GetPlayerName(PlayerBlack)+" " + PlayerBlack.TimeRemainingMs + " ms");
                 }
 
                 string pgn = PGNCreator.CreatePGN(board, result, GetPlayerName(PlayerWhite), GetPlayerName(PlayerBlack));
@@ -396,7 +394,7 @@ namespace ChessChallenge.Application
         }
 
         static string GetPlayerName(ChessPlayer player) => "" + player;
-        static string GetPlayerName(PlayerType type) => type.ToString();
+        string GetPlayerName(PlayerType type) => GetPlayerName(CreatePlayer(type));
 
         public void StartNewBotMatch(PlayerType botTypeA, PlayerType botTypeB)
         {
