@@ -35,7 +35,8 @@ namespace ChessChallenge.Application
 
             foreach (var child in syntaxNode.ChildNodesAndTokens())
             {
-                numTokensInChildren += CountTokens(child);
+                if (!(child.ToString().StartsWith("System.Console.Write") || child.ToString().StartsWith("Console.Write")))
+                    numTokensInChildren += CountTokens(child);
             }
 
             if (syntaxNode.IsToken && !tokensToIgnore.Contains(kind))
