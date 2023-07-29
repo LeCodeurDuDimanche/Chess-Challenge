@@ -15,7 +15,7 @@ public class Stockfish : IChessBot
     const string STOCKFISH_DEPTH = "10";
 
     // Min: 0, Max: 20
-    const string STOCKFISH_SKILL_LEVEL = "20";
+    const string STOCKFISH_SKILL_LEVEL = "0";
 
     // For best performance, set this equal to the number of CPU cores available.
     const string STOCKFISH_THREADS = "6";
