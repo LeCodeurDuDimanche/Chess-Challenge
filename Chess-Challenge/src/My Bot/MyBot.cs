@@ -1,3 +1,3 @@
 ﻿using ChessChallenge.API;
 
-public class MyBot: ProxyBot<BotAdrien2.BotAdrien2> {}
+public class MyBot: ProxyBot<BotAdrien3WithProtectors.BotAdrien3WithProtectors> {}
