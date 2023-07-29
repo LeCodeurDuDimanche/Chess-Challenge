@@ -18,8 +18,26 @@ namespace ChessChallenge.Application
             float spacing = buttonSize.Y * 1.2f;
             float breakSpacing = spacing * 0.6f;
 
-            string botName = getBotName(typeof(MyBot)), evilBotName = getBotName(typeof(ChessChallenge.Example.EvilBot));
+            // Undo Button
+            if (controller.PlayerWhite.IsHuman || controller.PlayerBlack.IsHuman)
+            {
+                var undoNum = (controller.PlayerWhite.IsBot || controller.PlayerBlack.IsBot) ? 2 : 1 ;
+                if (NextButtonInRow("Undo Move", ref buttonPos, spacing, buttonSize))
+                {
+                    controller.UndoMoves((uint)undoNum);
+                }
+            } else {
+                buttonPos = UIHelper.Scale(new Vector2(260, 210));
+            }
+            
+
             // Game Buttons
+            buttonPos.Y += breakSpacing;
+
+            if (NextButtonInRow("Human vs Human", ref buttonPos, spacing, buttonSize))
+            {
+                controller.StartNewGame(ChallengeController.PlayerType.Human, ChallengeController.PlayerType.Human);
+            }
             if (NextButtonInRow("Human vs " + botName, ref buttonPos, spacing, buttonSize))
             {
                 var whiteType = controller.HumanWasWhiteLastGame ? ChallengeController.PlayerType.MyBot : ChallengeController.PlayerType.Human;
@@ -34,7 +52,7 @@ namespace ChessChallenge.Application
             {
                 controller.StartNewBotMatch(ChallengeController.PlayerType.MyBot, ChallengeController.PlayerType.EvilBot);
             }
-            if (NextButtonInRow("MyBot vs Stockfish", ref buttonPos, spacing, buttonSize))
+            if (NextButtonInRow(botName + " vs Stockfish", ref buttonPos, spacing, buttonSize))
             {
                 controller.StartNewBotMatch(ChallengeController.PlayerType.MyBot, ChallengeController.PlayerType.Stockfish);
             }
