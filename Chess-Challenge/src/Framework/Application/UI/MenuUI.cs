@@ -13,7 +13,13 @@ namespace ChessChallenge.Application
         }
         public static void DrawButtons(ChallengeController controller)
         {
-            Vector2 buttonPos = UIHelper.Scale(new Vector2(260, 210));
+            string botName = getBotName(typeof(MyBot)), evilBotName = getBotName(typeof(ChessChallenge.Example.EvilBot));
+            if (botName.Length > 15)
+                botName = botName.Remove(11) + "..."; 
+            if (evilBotName.Length > 15)
+                evilBotName = evilBotName.Remove(11) + "...";
+
+            Vector2 buttonPos = UIHelper.Scale(new Vector2(260, 144));
             Vector2 buttonSize = UIHelper.Scale(new Vector2(420, 55));
             float spacing = buttonSize.Y * 1.2f;
             float breakSpacing = spacing * 0.6f;
