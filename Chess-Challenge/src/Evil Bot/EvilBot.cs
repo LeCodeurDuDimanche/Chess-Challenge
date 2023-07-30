@@ -1,7 +1,4 @@
-﻿using ChessChallenge.API;
-using System;
-
-namespace ChessChallenge.Example
+﻿namespace ChessChallenge.Example
 {
-    public class EvilBot : ProxyBot<BotAdrien4.BotAdrien4>{}
+    public class EvilBot : ProxyBot<BotAdrien3WithProtectors.BotAdrien3WithProtectors>{}
 }
